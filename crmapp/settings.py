@@ -143,7 +143,10 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+<<<<<<< HEAD
 
+=======
+>>>>>>> homepage
 # Template directory setting
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
@@ -160,3 +163,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
 )
+<<<<<<< HEAD
+=======
+# Parse database configuration from $DATABASE_URL
+if ENV_ROLE == 'production':
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
+
+>>>>>>> homepage
