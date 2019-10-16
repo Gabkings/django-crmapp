@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+
 import os
 from django.core.exceptions import ImproperlyConfigured
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 #handling key Import Errors
 def get_env_variable(var_name):
@@ -31,7 +33,7 @@ ENV_ROLE = get_env_variable('ENV_ROLE')
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vyi_h+p&120+=aa!#xkm8qc8e!+72^67#^8kub$^*d37+&vsht'
+SECRET_KEY=get_env_variable('SECRET_KEY')
 
 #SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -40,20 +42,20 @@ if ENV_ROLE == 'development':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crmapp.marketing',
-    'crmapp.subscribers',
+    'crmapp.subscribers'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -162,6 +164,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 # Parse database configuration from $DATABASE_URL
-if ENV_ROLE == 'production':
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
+# if ENV_ROLE == 'production':
+#     import dj_database_url
+#     DATABASES['default'] =  dj_database_url.config()
