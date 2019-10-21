@@ -27,6 +27,13 @@ def get_env_variable(var_name):
 
 ENV_ROLE = get_env_variable('ENV_ROLE')
 
+# Stripe Key Settings
+STRIPE_SECRET_KEY = get_env_variable('MY_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = get_env_variable('PUBLIC_KEY')
+
+# Current Subscription Price
+SUBSCRIPTION_PRICE = 1500
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
