@@ -172,3 +172,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # if ENV_ROLE == 'production':
 #     import dj_database_url
 #     DATABASES['default'] =  dj_database_url.config()
+
+LOGIN_REDIRECT_URL = '/account/list/'
