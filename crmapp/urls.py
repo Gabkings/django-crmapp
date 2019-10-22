@@ -19,6 +19,7 @@ from django.contrib import admin
 from .marketing.views import HomePage
 from .accounts.views import AccountList
 from .accounts.urls import account_urls
+from contacts.urls import contact_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -42,4 +43,6 @@ urlpatterns = [
         AccountList.as_view(), name='account_list'
     ),
     url(r'^account/(?P<uuid>[\w-]+)/', include(account_urls)),
+    #contacts related URLs
+    url(r'^contact/(?P<uuid>[\w-]+)/', include(contact_urls)),
 ]
