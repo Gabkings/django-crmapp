@@ -11,7 +11,7 @@ class Account(models.Model):
     address_one = models.CharField(max_length=100)
     address_two = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
+    state = models.CharField(max_length=10)
     phone = models.CharField(max_length=20)
     owner = models.ForeignKey(User)
     created_on = models.DateField(auto_now_add=True)
