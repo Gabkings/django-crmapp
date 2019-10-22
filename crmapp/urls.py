@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from .marketing.views import HomePage
-from accounts.views import AccountList
+from .accounts.views import AccountList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

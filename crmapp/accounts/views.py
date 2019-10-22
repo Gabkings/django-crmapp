@@ -9,7 +9,7 @@ from .models import Account
 class AccountList(ListView):
     model = Account
     template_name = 'accounts/account_list.html'
-     paginate_by = 12
+    paginate_by = 12
     context_object_name = 'accounts'
 
     def get_queryset(self):
