@@ -35,6 +35,9 @@ urlpatterns = [
         'django.contrib.auth.views.logout', {'next_page': '/login/'}
     ),
     # Account related URLs
+    url(r'^account/new/$',
+    'crmapp.accounts.views.account_cru', name='account_new'
+    ),
     url(r'^account/list/$',
         AccountList.as_view(), name='account_list'
     ),
