@@ -19,7 +19,7 @@ from django.contrib import admin
 from .marketing.views import HomePage
 from .accounts.views import AccountList
 from .accounts.urls import account_urls
-from contacts.urls import contact_urls
+from .contacts.urls import contact_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
