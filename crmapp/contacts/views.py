@@ -17,33 +17,35 @@ def contact_detail(request, uuid):
                 {'contact': contact}
     )
 
+
+
 @login_required()
 def contact_cru(request):
+
     if request.POST:
         form = ContactForm(request.POST)
         if form.is_valid():
-            #make sure the user owns the accounts
+            # make sure the user owns the account
             account = form.cleaned_data['account']
             if account.owner != request.user:
                 return HttpResponseForbidden()
-
-            #save the data
+            # save the data
             contact = form.save(commit=False)
             contact.owner = request.user
             contact.save()
-            ''' return the user to the account detail view '''
+            # return the user to the account detail view
             reverse_url = reverse(
                 'crmapp.accounts.views.account_detail',
                 args=(account.uuid,)
             )
-
             return HttpResponseRedirect(reverse_url)
     else:
         form = ContactForm()
 
     variables = {
-        'form' : form
+        'form': form,
     }
+
     template = 'contacts/contact_cru.html'
 
     return render(request, template, variables)
