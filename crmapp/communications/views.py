@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from .models import Communication
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from .forms import CommunicationForm
+
 
 # Create your views here.
 
@@ -12,3 +16,32 @@ def comm_detail(request, uuid):
         return HttpResponseForbidden()
 
     return render(request, 'communications/comm_detail.html', {'comm':comm})
+
+@login_required()
+def comm_cru(request):
+    if request.POST:
+        form = CommunicationForm(request.POST)
+        if form.is_valid():
+            '''Make sure the user owns account '''
+            account = form.cleaned_data['account']
+            if account.owner != request.user:
+                return HttpResponseForbidden()
+            '''save the data '''
+            comm = form.save(commit=False)
+            comm.owner = request.user
+            comm.save()
+            ''' return the user to account detail page '''
+            reverse_url = reverse(
+                'crmapp.accounts.views.account_detail',
+                args=(account.uuid,)
+            )
+            return HttpResponseRedirect(reverse_url)
+    else:
+        form = CommunicationForm()
+    variables = {
+        'form': form
+    }
+
+    template = 'communications/comm_cru.html'
+
+    return render(request, template, variables)
