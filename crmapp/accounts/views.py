@@ -6,6 +6,7 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from crmapp.contacts.models import Contact
+from crmapp.communications.models import Communication
 
 # Create your views here.
 from .models import Account
@@ -44,10 +45,13 @@ def account_detail(request, uuid):
     if account.owner != request.user:
             return HttpResponseForbidden()
     contacts = Contact.objects.filter(account=account)
+    communications = Communication.objects.filter(
+        account=account).order_by('-created_on')
 
     variables = {
         'account': account,
         'contacts': contacts,
+        'communications': communications,
     }
 
     return render(request, 'accounts/account_detail.html', variables)

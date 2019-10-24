@@ -28,7 +28,12 @@
                    New Contact</a>
             </div>
         </div>
-        {# List Communications #}
+        {# List of Communications #}
+        <ul id="co-list" class="strip-list col-md-12 p-none">
+            {% for comm in communications %}
+                {% include 'communications/comm_item_view.html' %}
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}
